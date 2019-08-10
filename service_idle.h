@@ -27,10 +27,17 @@ extern "C" {
 #endif
 
 /* Exported typedef ----------------------------------------------------------*/
+typedef struct srv_idle_info_s {
+    int cnt;
+}srv_idle_info_t;
+
+
 /* Exported variables --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 int service_idle_init(void);
+int service_idle_queue_push(srv_idle_info_t *info);
+int service_idle_queue_pop(srv_idle_info_t *info);
 
 #ifdef  __cplusplus
 }
