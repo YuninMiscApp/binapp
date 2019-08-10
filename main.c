@@ -16,6 +16,12 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include <stdio.h>
+#include "glib.h"
+
+#include "service_idle.h"
+#include "service_master.h"
+#include "service_sys.h"
+
 
 #ifdef  __cplusplus
 extern "C" {
@@ -28,9 +34,19 @@ extern "C" {
 /* Private functions ---------------------------------------------------------*/
 
 
+/* 首先在main主程序中实现事件循环 */
+void main_event_loop(void)
+{
+	GMainLoop *loop;
+	loop = g_main_loop_new (NULL, FALSE);
+	g_main_loop_run (loop);
+	g_main_loop_unref (loop);
+}
+
 int main(int argc,char *argv[])
 {
-	printf("hello world!!!\n");
+	printf("hello BinApp!!!\n");
+	main_event_loop();
 	return 0;
 }
 
