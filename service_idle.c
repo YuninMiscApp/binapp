@@ -50,6 +50,7 @@ service_idle_thread (gpointer data)
 		service_idle_queue_push(&info);
 		sleep(1);
 		bzero(&info,sizeof(info));
+		//执行到service_idle_queue_pop函数,该线程会进入"睡眠/阻塞"状态,等待事件唤醒.
 		service_idle_queue_pop(&info);
 		printf("service_idle queue_pop %d ...\n",info.cnt);
 	}

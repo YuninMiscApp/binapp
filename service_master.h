@@ -28,10 +28,16 @@ extern "C" {
 #endif
 
 /* Exported typedef ----------------------------------------------------------*/
+typedef struct srv_master_info_s {
+    int cnt;
+}srv_master_info_t;
+
 /* Exported variables --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
 int service_master_init(void);
+int service_master_queue_push(srv_master_info_t *info);
+int service_master_queue_pop(srv_master_info_t *info);
 
 #ifdef  __cplusplus
 }

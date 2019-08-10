@@ -17,10 +17,15 @@
 /* Includes ------------------------------------------------------------------*/
 #include <stdio.h>
 #include <unistd.h>
+#include <strings.h>
+#include <assert.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "glib.h"
 
 #include "service_sys.h"
+#include "service_master.h"
 
 #ifdef  __cplusplus
 extern "C" {
@@ -35,10 +40,16 @@ static gpointer
 service_sys_thread (gpointer data)
 {
 	printf("service_sys task running ....\n");
+	srv_master_info_t info;
+	static int __cnt = 0;
 	
 	while(1)
 	{
-		sleep(1);
+		bzero(&info,sizeof(info));
+		info.cnt = __cnt;
+		__cnt += 3;
+		service_master_queue_push(&info);
+		sleep(2);
 	}
 	printf("service_sys task Exit ...\n");
 	return NULL;
