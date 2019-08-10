@@ -15,6 +15,10 @@
   */ 
 
 /* Includes ------------------------------------------------------------------*/
+#include <stdio.h>
+#include <unistd.h>
+
+#include "glib.h"
 
 #include "service_idle.h"
 
@@ -27,6 +31,35 @@ extern "C" {
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
+static gpointer
+service_idle_thread (gpointer data)
+{
+	printf("service_idle task running ...\n");
+	
+	while(1)
+	{
+		sleep(1);
+	}
+	printf("service_idle task Exit ...\n");
+	return NULL;
+}
+
+
+/***************************************************
+ * Function : service_idle_init
+ * Author : leon.xie
+ * Creat Date : 2019/08/10  22:20:7
+ * Description : none
+ * In-Parameter : as below
+ * Return : as below
+ * Modify : none
+ **************************************************/
+int service_idle_init(void)
+{
+	g_thread_new ("service_idle", service_idle_thread, NULL);
+    return 0;
+}
+
 
 #ifdef  __cplusplus
 }

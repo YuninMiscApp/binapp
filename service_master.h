@@ -31,6 +31,7 @@ extern "C" {
 /* Exported variables --------------------------------------------------------*/
 /* Exported macro ------------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
+int service_master_init(void);
 
 #ifdef  __cplusplus
 }

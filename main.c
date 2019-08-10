@@ -52,7 +52,7 @@ void main_event_loop(void)
 	GMainLoop *loop;
 	loop = g_main_loop_new (NULL, FALSE);
 	//建立一个定时事件.
-	g_timeout_add_seconds (30, quit_loop, loop);
+	g_timeout_add_seconds (60, quit_loop, loop);
 	//程序运行到g_main_loop_run,进程进入"睡眠"状态,等待被其他事件唤醒.
 	g_main_loop_run (loop);
 	g_main_loop_unref (loop);
@@ -61,6 +61,9 @@ void main_event_loop(void)
 int main(int argc,char *argv[])
 {
 	printf("hello BinApp!!!\n");
+	service_idle_init();
+	service_sys_init();
+	service_master_init();
 	main_event_loop();
 	printf("BinApp Exit!!!\n");
 	return 0;
