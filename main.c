@@ -33,12 +33,27 @@ extern "C" {
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
+//
+static gboolean
+quit_loop (gpointer data)
+{
+	printf(">>>>>>>> quit_loop now ...\n");
+    GMainLoop *loop = data;
+    g_main_loop_quit (loop);
+    return G_SOURCE_REMOVE;
+}
+
+
+
 
 /* 首先在main主程序中实现事件循环 */
 void main_event_loop(void)
 {
 	GMainLoop *loop;
 	loop = g_main_loop_new (NULL, FALSE);
+	//建立一个定时事件.
+	g_timeout_add_seconds (30, quit_loop, loop);
+	//程序运行到g_main_loop_run,进程进入"睡眠"状态,等待被其他事件唤醒.
 	g_main_loop_run (loop);
 	g_main_loop_unref (loop);
 }
@@ -47,6 +62,7 @@ int main(int argc,char *argv[])
 {
 	printf("hello BinApp!!!\n");
 	main_event_loop();
+	printf("BinApp Exit!!!\n");
 	return 0;
 }
 
